@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1320" viewBox="0 0 1800 1320">
+  <defs>
+    <pattern id="holes" width="25.4" height="25.4" patternUnits="userSpaceOnUse">
+      <circle cx="12.7" cy="12.7" r="2.2" fill="#cbd5a5" stroke="#64748b" stroke-width="0.7"/>
+    </pattern>
+    <style>
+      .bg { fill:#f8fafc; }
+      .board { fill:#d9e7b7; stroke:#334155; stroke-width:4; }
+      .title { font:700 34px Arial,sans-serif; fill:#111827; }
+      .h1 { font:700 22px Arial,sans-serif; fill:#111827; }
+      .h2 { font:700 17px Arial,sans-serif; fill:#111827; }
+      .t { font:15px Arial,sans-serif; fill:#1f2937; }
+      .small { font:13px Arial,sans-serif; fill:#334155; }
+      .tiny { font:11px Arial,sans-serif; fill:#475569; }
+      .light { fill:#f8fafc; }
+      .module { fill:#eef2f7; stroke:#111827; stroke-width:3; }
+      .socket { fill:#1f2937; stroke:#000; stroke-width:1; }
+      .terminal { fill:#22c55e; stroke:#14532d; stroke-width:2; }
+      .wire { fill:none; stroke-width:4; stroke-linecap:round; stroke-linejoin:round; }
+      .bus { fill:none; stroke-width:10; stroke-linecap:round; opacity:.9; }
+      .p12 { stroke:#dc2626; }
+      .p5 { stroke:#f97316; }
+      .p33 { stroke:#7c3aed; }
+      .gnd { stroke:#111827; }
+      .sig { stroke:#2563eb; }
+      .uart { stroke:#16a34a; }
+      .motor { stroke:#0891b2; }
+      .under { stroke-dasharray:12 8; }
+      .call { fill:#ffffff; stroke:#64748b; stroke-width:2; }
+      .warn { fill:#fff7ed; stroke:#ea580c; stroke-width:2; }
+    </style>
+    <marker id="dim" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse"><path d="M10 1 L1 5 L10 9" fill="none" stroke="#475569" stroke-width="1.5"/></marker>
+  </defs>
+
+  <rect class="bg" width="1800" height="1320"/>
+  <text x="55" y="55" class="title">LTS RESPOOLER — SUGGESTED PERFBOARD COMPONENT LAYOUT</text>
+  <text x="55" y="88" class="t">Component side • pad-per-hole 2.54 mm board • module outline/pin position varies by manufacturer</text>
+
+  <!-- dimensions -->
+  <line x1="130" y1="130" x2="1630" y2="130" stroke="#475569" stroke-width="2" marker-start="url(#dim)" marker-end="url(#dim)"/>
+  <text x="815" y="120" class="h2">150 mm nominal</text>
+  <line x1="85" y1="175" x2="85" y2="1075" stroke="#475569" stroke-width="2" marker-start="url(#dim)" marker-end="url(#dim)"/>
+  <text x="35" y="660" class="h2" transform="rotate(-90 35 660)">90 mm nominal</text>
+
+  <!-- board -->
+  <rect x="130" y="175" width="1500" height="900" rx="10" class="board"/>
+  <rect x="130" y="175" width="1500" height="900" rx="10" fill="url(#holes)" opacity=".82"/>
+  <circle cx="165" cy="210" r="14" fill="#f8fafc" stroke="#64748b" stroke-width="3"/>
+  <circle cx="1595" cy="210" r="14" fill="#f8fafc" stroke="#64748b" stroke-width="3"/>
+  <circle cx="165" cy="1040" r="14" fill="#f8fafc" stroke="#64748b" stroke-width="3"/>
+  <circle cx="1595" cy="1040" r="14" fill="#f8fafc" stroke="#64748b" stroke-width="3"/>
+
+  <!-- underside buses -->
+  <path d="M210 980 H1540" class="bus gnd under"/>
+  <text x="1360" y="1018" class="h2">GND BUS (underside, 22 AWG)</text>
+  <path d="M210 920 H1080" class="bus p5 under"/>
+  <text x="770" y="952" class="h2" fill="#c2410c">+5V BUS (underside)</text>
+  <path d="M210 850 H650" class="bus p12 under"/>
+  <text x="335" y="882" class="h2" fill="#b91c1c">+12V BUS (underside)</text>
+
+  <!-- 12V input and fuse -->
+  <rect x="175" y="740" width="135" height="70" rx="6" class="terminal"/>
+  <circle cx="218" cy="775" r="10" fill="#d1fae5" stroke="#14532d" stroke-width="2"/>
+  <circle cx="270" cy="775" r="10" fill="#d1fae5" stroke="#14532d" stroke-width="2"/>
+  <text x="184" y="725" class="h2">J1 12 V INPUT</text>
+  <text x="202" y="802" class="small">+     –</text>
+  <rect x="330" y="815" width="120" height="40" rx="6" class="module"/>
+  <text x="354" y="841" class="h2">F1 2–3 A</text>
+  <path d="M218 775 H320 V835 H330" class="wire p12"/>
+  <path d="M450 835 H530 V850" class="wire p12"/>
+  <path d="M270 775 V980" class="wire gnd"/>
+
+  <!-- Motor terminal -->
+  <rect x="175" y="260" width="180" height="90" rx="6" class="terminal"/>
+  <text x="188" y="245" class="h2">J2 STEPPER MOTOR</text>
+  <circle cx="207" cy="305" r="10" fill="#d1fae5"/><circle cx="248" cy="305" r="10" fill="#d1fae5"/><circle cx="289" cy="305" r="10" fill="#d1fae5"/><circle cx="330" cy="305" r="10" fill="#d1fae5"/>
+  <text x="193" y="335" class="small">A1  A2  B1  B2</text>
+
+  <!-- TMC -->
+  <rect x="430" y="250" width="215" height="360" rx="8" fill="#111827" stroke="#000" stroke-width="3"/>
+  <rect x="470" y="295" width="135" height="175" rx="5" fill="#14532d" stroke="#4ade80" stroke-width="2"/>
+  <text x="484" y="335" class="h1 light">TMC2209</text>
+  <text x="493" y="363" class="small light">R110 carrier</text>
+  <text x="501" y="390" class="small light">HEATSINK</text>
+  <text x="483" y="440" class="tiny light">PIN 1 / VM END</text>
+  <rect x="438" y="275" width="20" height="310" class="socket"/>
+  <rect x="617" y="275" width="20" height="310" class="socket"/>
+  <text x="442" y="632" class="h2">SOCKETED • MARK ORIENTATION</text>
+  <path d="M355 285 H430" class="wire motor"/>
+  <path d="M355 305 H420 V320 H430" class="wire motor"/>
+  <path d="M355 325 H410 V355 H430" class="wire motor"/>
+  <path d="M355 345 H400 V390 H430" class="wire motor"/>
+  <path d="M465 585 V850" class="wire p12"/>
+  <path d="M500 585 V980" class="wire gnd"/>
+
+  <!-- VM capacitor -->
+  <ellipse cx="690" cy="535" rx="32" ry="38" fill="#1e3a8a" stroke="#172554" stroke-width="3"/>
+  <text x="670" y="530" class="h2 light">C1</text>
+  <text x="659" y="551" class="tiny light">100µF</text>
+  <text x="650" y="592" class="small">35 V • beside VM</text>
+  <path d="M678 570 V850" class="wire p12"/>
+  <path d="M702 570 V980" class="wire gnd"/>
+
+  <!-- Buck -->
+  <rect x="350" y="700" width="260" height="105" rx="8" class="module"/>
+  <text x="390" y="735" class="h1">5 V / ≥2.5 A BUCK</text>
+  <text x="377" y="766" class="small">UBEC or fixed regulator module</text>
+  <text x="374" y="792" class="small">IN: 12V/GND • OUT: 5V/GND</text>
+  <path d="M430 805 V850" class="wire p12"/>
+  <path d="M490 805 V980" class="wire gnd"/>
+  <path d="M550 805 V920" class="wire p5"/>
+
+  <!-- Fan driver and fan terminal -->
+  <rect x="690" y="700" width="225" height="105" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+  <text x="720" y="735" class="h1">FAN MOSFET DRIVER</text>
+  <text x="715" y="764" class="small">V+ • GND • IN(GPIO13)</text>
+  <text x="715" y="790" class="small">OUT+ • switched OUT–</text>
+  <rect x="955" y="720" width="120" height="70" rx="6" class="terminal"/>
+  <text x="977" y="707" class="h2">J7 FAN</text>
+  <circle cx="990" cy="755" r="10" fill="#d1fae5"/><circle cx="1040" cy="755" r="10" fill="#d1fae5"/>
+  <text x="982" y="783" class="small">+     –</text>
+  <path d="M915 735 H955" class="wire p5"/>
+  <path d="M915 775 H955" class="wire gnd"/>
+  <path d="M755 805 V920" class="wire p5"/>
+  <path d="M790 805 V980" class="wire gnd"/>
+
+  <!-- 5V bulk cap -->
+  <ellipse cx="990" cy="875" rx="38" ry="44" fill="#7c2d12" stroke="#431407" stroke-width="3"/>
+  <text x="970" y="870" class="h2 light">C2</text>
+  <text x="956" y="894" class="tiny light">470–1000µF</text>
+  <path d="M975 915 V920" class="wire p5"/>
+  <path d="M1005 915 V980" class="wire gnd"/>
+
+  <!-- Accessory terminal row -->
+  <rect x="750" y="245" width="125" height="70" rx="6" class="terminal"/>
+  <text x="770" y="230" class="h2">J3 BUTTON</text>
+  <circle cx="786" cy="280" r="10" fill="#d1fae5"/><circle cx="840" cy="280" r="10" fill="#d1fae5"/>
+  <text x="765" y="307" class="small">IO10  GND</text>
+  <path d="M840 315 V980" class="wire gnd"/>
+
+  <rect x="910" y="245" width="125" height="70" rx="6" class="terminal"/>
+  <text x="925" y="230" class="h2">J4 SENSOR</text>
+  <circle cx="946" cy="280" r="10" fill="#d1fae5"/><circle cx="1000" cy="280" r="10" fill="#d1fae5"/>
+  <text x="925" y="307" class="small">IO11  GND</text>
+  <path d="M1000 315 V980" class="wire gnd"/>
+
+  <rect x="750" y="390" width="145" height="80" rx="6" class="terminal"/>
+  <text x="775" y="375" class="h2">J5 SERVO</text>
+  <circle cx="780" cy="430" r="10" fill="#d1fae5"/><circle cx="823" cy="430" r="10" fill="#d1fae5"/><circle cx="866" cy="430" r="10" fill="#d1fae5"/>
+  <text x="766" y="461" class="small">SIG  +5V  GND</text>
+  <path d="M823 470 V920" class="wire p5"/>
+  <path d="M866 470 V980" class="wire gnd"/>
+
+  <rect x="940" y="390" width="145" height="80" rx="6" class="terminal"/>
+  <text x="963" y="375" class="h2">J6 WS2812</text>
+  <circle cx="970" cy="430" r="10" fill="#d1fae5"/><circle cx="1013" cy="430" r="10" fill="#d1fae5"/><circle cx="1056" cy="430" r="10" fill="#d1fae5"/>
+  <text x="956" y="461" class="small">DIN  +5V  GND</text>
+  <path d="M1013 470 V920" class="wire p5"/>
+  <path d="M1056 470 V980" class="wire gnd"/>
+
+  <!-- ESP board, partly overhanging right edge -->
+  <rect x="1135" y="300" width="530" height="280" rx="10" fill="#0f766e" stroke="#042f2e" stroke-width="4"/>
+  <rect x="1160" y="330" width="420" height="22" class="socket"/>
+  <rect x="1160" y="528" width="420" height="22" class="socket"/>
+  <rect x="1455" y="368" width="175" height="145" rx="6" fill="#cbd5e1" stroke="#475569" stroke-width="3"/>
+  <path d="M1470 390 h145 m-145 22 h145 m-145 22 h145 m-145 22 h145 m-145 22 h145" stroke="#64748b" stroke-width="4"/>
+  <rect x="1120" y="390" width="45" height="95" rx="5" fill="#94a3b8" stroke="#334155" stroke-width="3"/>
+  <text x="1195" y="400" class="h1 light">ESP32-S3-DEVKITC-1</text>
+  <text x="1195" y="430" class="small light">USB at left • antenna overhang at right</text>
+  <text x="1195" y="458" class="small light">Socket on two 2×22 female header rows</text>
+  <text x="1195" y="490" class="small light">Wire by printed GPIO labels, not drawn pad position.</text>
+  <text x="1482" y="535" class="h2">ANTENNA</text>
+  <rect x="1540" y="250" width="230" height="380" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="3" stroke-dasharray="12 8"/>
+  <text x="1580" y="610" class="h2" fill="#b91c1c">15 mm KEEP-OUT</text>
+  <text x="1580" y="635" class="small" fill="#b91c1c">No wire, copper, screws, metal</text>
+
+  <!-- ESP power jumper -->
+  <rect x="1110" y="650" width="150" height="72" rx="7" class="warn"/>
+  <text x="1146" y="678" class="h2">JP1 5V</text>
+  <text x="1126" y="704" class="small">Remove before USB*</text>
+  <path d="M1165 722 V920" class="wire p5"/>
+  <path d="M1220 722 V760 H1265 V550" class="wire p5"/>
+  <path d="M1320 550 V980" class="wire gnd"/>
+
+  <!-- Logic jumper schedule: actual wire paths are left to the builder to avoid crossings. -->
+  <rect x="1085" y="750" width="505" height="160" rx="9" class="call"/>
+  <text x="1110" y="780" class="h1">SIGNAL JUMPER SCHEDULE</text>
+  <text x="1110" y="808" class="small">J3 IO10 ↔ GPIO10 • J4 IO11 ↔ GPIO11</text>
+  <text x="1110" y="832" class="small">J5 SIG ↔ 330Ω ↔ GPIO12 • J6 DIN ↔ 330Ω ↔ GPIO9</text>
+  <text x="1110" y="856" class="small">Fan driver IN ↔ GPIO13</text>
+  <text x="1110" y="880" class="small">TMC: STEP↔14 • DIR↔21 • EN↔40 • VIO↔3V3</text>
+  <text x="1110" y="902" class="small">UART: GPIO18 RX direct to PDN; GPIO17 TX through 1kΩ to PDN</text>
+
+  <!-- Notes/legend -->
+  <rect x="130" y="1110" width="1050" height="155" rx="10" class="call"/>
+  <text x="155" y="1142" class="h1">ASSEMBLY NOTES</text>
+  <text x="160" y="1175" class="t">1. Dashed heavy buses are insulated 22 AWG jumpers on the solder side; pad-per-hole board has no automatic bus.</text>
+  <text x="160" y="1204" class="t">2. Signal-wire paths are omitted for clarity: use the jumper schedule and the authoritative wiring schematic/netlist.</text>
+  <text x="160" y="1233" class="t">3. Keep VM/motor wiring short; twist coil pairs. *JP1 is a conservative back-feed precaution for clone DevKits.</text>
+  <rect x="1210" y="1110" width="560" height="155" rx="10" class="call"/>
+  <text x="1235" y="1142" class="h1">COLOR / VIEW LEGEND</text>
+  <line x1="1240" y1="1170" x2="1290" y2="1170" class="wire p12"/><text x="1300" y="1175" class="small">12V</text>
+  <line x1="1360" y1="1170" x2="1410" y2="1170" class="wire p5"/><text x="1420" y="1175" class="small">5V</text>
+  <line x1="1480" y1="1170" x2="1530" y2="1170" class="wire p33"/><text x="1540" y="1175" class="small">3V3</text>
+  <line x1="1600" y1="1170" x2="1650" y2="1170" class="wire gnd"/><text x="1660" y="1175" class="small">GND</text>
+  <line x1="1240" y1="1205" x2="1290" y2="1205" class="wire sig"/><text x="1300" y="1210" class="small">GPIO</text>
+  <line x1="1360" y1="1205" x2="1410" y2="1205" class="wire uart"/><text x="1420" y="1210" class="small">UART</text>
+  <line x1="1480" y1="1205" x2="1530" y2="1205" class="wire motor"/><text x="1540" y="1210" class="small">Motor</text>
+  <line x1="1600" y1="1205" x2="1650" y2="1205" class="wire gnd under"/><text x="1660" y="1210" class="small">underside</text>
+  <text x="1235" y="1244" class="tiny">DRAWING LTS-RSP-DIY-002 • REV A • 2026-08-11 • NOT TO SCALE</text>
+</svg>

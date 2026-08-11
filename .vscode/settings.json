@@ -1,0 +1,8 @@
+{
+  "platformio-ide.activateOnlyOnPlatformIOProject": true,
+  "C_Cpp.default.compileCommands": "${workspaceFolder}/compile_commands.json",
+  "files.associations": {
+    "(.txt) Control Board Code": "cpp",
+    "(.txt) Driver Board Code": "cpp"
+  }
+}
