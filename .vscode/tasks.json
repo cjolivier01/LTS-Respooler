@@ -1,0 +1,64 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "PlatformIO: Build control board",
+      "type": "shell",
+      "command": "make",
+      "args": ["control"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "group": {"kind": "build", "isDefault": true},
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "PlatformIO: Build driver board",
+      "type": "shell",
+      "command": "make",
+      "args": ["driver"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "group": "build",
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "PlatformIO: Build all",
+      "type": "shell",
+      "command": "make",
+      "args": ["build-all"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "PlatformIO: Upload selected board",
+      "type": "shell",
+      "command": "make",
+      "args": ["upload", "ENV=${input:environment}"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "PlatformIO: Monitor",
+      "type": "shell",
+      "command": "make",
+      "args": ["monitor"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "PlatformIO: Generate compile database",
+      "type": "shell",
+      "command": "make",
+      "args": ["compiledb", "ENV=${input:environment}"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "environment",
+      "type": "pickString",
+      "description": "PlatformIO board environment",
+      "options": ["control_board_v4", "driver_board_v1"],
+      "default": "control_board_v4"
+    }
+  ]
+}

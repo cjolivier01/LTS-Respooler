@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1250" viewBox="0 0 1800 1250">
+  <defs>
+    <style>
+      .bg { fill:#f7f9fc; }
+      .panel { fill:#ffffff; stroke:#1f2937; stroke-width:3; }
+      .sub { fill:#f8fafc; stroke:#64748b; stroke-width:2; }
+      .title { font:700 34px Arial,sans-serif; fill:#111827; }
+      .h1 { font:700 23px Arial,sans-serif; fill:#111827; }
+      .h2 { font:700 18px Arial,sans-serif; fill:#111827; }
+      .t { font:16px Arial,sans-serif; fill:#1f2937; }
+      .small { font:14px Arial,sans-serif; fill:#334155; }
+      .tiny { font:12px Arial,sans-serif; fill:#475569; }
+      .pin { fill:#eff6ff; stroke:#2563eb; stroke-width:1.5; }
+      .wire { fill:none; stroke-width:4; stroke-linecap:round; stroke-linejoin:round; }
+      .p12 { stroke:#dc2626; }
+      .p5 { stroke:#f97316; }
+      .p33 { stroke:#7c3aed; }
+      .gnd { stroke:#111827; }
+      .sig { stroke:#2563eb; }
+      .uart { stroke:#16a34a; }
+      .motor { stroke:#0891b2; }
+      .dash { stroke-dasharray:9 7; }
+      .node { stroke:#ffffff; stroke-width:2; }
+      .warn { fill:#fff7ed; stroke:#ea580c; stroke-width:2; }
+    </style>
+    <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#dc2626"/></marker>
+    <marker id="arrowOrange" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#f97316"/></marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/></marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#16a34a"/></marker>
+  </defs>
+
+  <rect class="bg" width="1800" height="1250"/>
+  <text x="55" y="55" class="title">LTS RESPOOLER — ESP32-S3 PERFBOARD WIRING SCHEMATIC</text>
+  <text x="55" y="87" class="t">Control Board V4 firmware pin map • 12 V motor rail • 5 V accessory rail • all grounds common</text>
+
+  <!-- Power section -->
+  <rect x="45" y="120" width="520" height="540" rx="12" class="panel"/>
+  <text x="70" y="155" class="h1">A. POWER DISTRIBUTION</text>
+  <rect x="75" y="195" width="130" height="80" rx="7" class="sub"/>
+  <text x="93" y="225" class="h2">J1 12 VDC</text>
+  <text x="93" y="250" class="small">+ center / – GND</text>
+  <rect x="260" y="202" width="95" height="62" rx="6" class="sub"/>
+  <text x="279" y="230" class="h2">F1</text>
+  <text x="272" y="251" class="tiny">2–3 A fuse</text>
+  <path d="M205 220 H260" class="wire p12" marker-end="url(#arrowRed)"/>
+  <path d="M355 220 H530" class="wire p12"/>
+  <text x="405" y="206" class="h2" fill="#dc2626">+12V BUS</text>
+
+  <rect x="80" y="330" width="210" height="115" rx="8" class="sub"/>
+  <text x="100" y="360" class="h2">12→5 V BUCK</text>
+  <text x="100" y="386" class="small">Fixed 5 V, ≥2.5 A</text>
+  <text x="100" y="411" class="small">IN+  IN–  OUT+  OUT–</text>
+  <path d="M430 220 V310 H185 V330" class="wire p12" marker-end="url(#arrowRed)"/>
+  <path d="M290 385 H520" class="wire p5"/>
+  <text x="373" y="371" class="h2" fill="#f97316">+5V BUS</text>
+
+  <rect x="90" y="490" width="135" height="90" rx="8" class="sub"/>
+  <text x="107" y="520" class="h2">C1 100µF</text>
+  <text x="109" y="545" class="small">35 V at TMC</text>
+  <text x="112" y="567" class="tiny">+12V ↔ GND</text>
+  <rect x="270" y="490" width="160" height="90" rx="8" class="sub"/>
+  <text x="288" y="520" class="h2">C2 470µF</text>
+  <text x="290" y="545" class="small">10 V at servo</text>
+  <text x="307" y="567" class="tiny">+5V ↔ GND</text>
+  <path d="M100 620 H530" class="wire gnd"/>
+  <text x="205" y="647" class="small">GND BUS — COMMON TO EVERYTHING</text>
+  <path d="M145 275 H65 V620 H100" class="wire gnd"/>
+  <path d="M185 445 H240 V620" class="wire gnd"/>
+
+  <!-- ESP32 -->
+  <rect x="620" y="120" width="455" height="655" rx="12" class="panel"/>
+  <text x="650" y="155" class="h1">B. ESP32-S3-DEVKITC-1</text>
+  <rect x="745" y="182" width="210" height="116" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="773" y="215" class="h2">ESP32-S3-WROOM-1</text>
+  <text x="785" y="242" class="small">Use Control Board V4 firmware</text>
+  <text x="790" y="269" class="small">USB end accessible</text>
+
+  <rect x="650" y="325" width="170" height="36" rx="5" class="pin"/><text x="665" y="349" class="h2">GPIO14 → STEP</text>
+  <rect x="650" y="370" width="170" height="36" rx="5" class="pin"/><text x="665" y="394" class="h2">GPIO21 → DIR</text>
+  <rect x="650" y="415" width="170" height="36" rx="5" class="pin"/><text x="665" y="439" class="h2">GPIO40 → EN</text>
+  <rect x="650" y="460" width="170" height="36" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/><text x="665" y="484" class="h2">GPIO18 ← UART RX</text>
+  <rect x="650" y="505" width="170" height="36" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/><text x="665" y="529" class="h2">GPIO17 → UART TX</text>
+
+  <rect x="870" y="325" width="170" height="36" rx="5" class="pin"/><text x="885" y="349" class="h2">GPIO10 → BUTTON</text>
+  <rect x="870" y="370" width="170" height="36" rx="5" class="pin"/><text x="885" y="394" class="h2">GPIO11 → SENSOR</text>
+  <rect x="870" y="415" width="170" height="36" rx="5" class="pin"/><text x="885" y="439" class="h2">GPIO12 → SERVO</text>
+  <rect x="870" y="460" width="170" height="36" rx="5" class="pin"/><text x="885" y="484" class="h2">GPIO9 → WS2812</text>
+  <rect x="870" y="505" width="170" height="36" rx="5" class="pin"/><text x="885" y="529" class="h2">GPIO13 → FAN</text>
+  <rect x="870" y="550" width="170" height="36" rx="5" class="pin"/><text x="885" y="574" class="h2">GPIO47 → CONN LED</text>
+
+  <rect x="650" y="615" width="170" height="42" rx="5" fill="#ffedd5" stroke="#f97316" stroke-width="1.5"/><text x="684" y="643" class="h2">5V via JP1</text>
+  <rect x="650" y="670" width="170" height="42" rx="5" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/><text x="687" y="698" class="h2">3V3 → TMC VIO</text>
+  <rect x="870" y="615" width="170" height="42" rx="5" fill="#e5e7eb" stroke="#111827" stroke-width="1.5"/><text x="913" y="643" class="h2">GND</text>
+  <rect x="870" y="670" width="170" height="42" rx="5" class="warn"/><text x="883" y="695" class="small">Keep antenna area clear</text>
+
+  <!-- TMC section -->
+  <rect x="1125" y="120" width="630" height="540" rx="12" class="panel"/>
+  <text x="1155" y="155" class="h1">C. TMC2209 STEPPER DRIVER (R110)</text>
+  <rect x="1190" y="190" width="310" height="385" rx="9" fill="#ecfdf5" stroke="#15803d" stroke-width="3"/>
+  <text x="1250" y="225" class="h1">TMC2209 CARRIER</text>
+  <text x="1215" y="265" class="h2">VM  ← +12V</text>
+  <text x="1215" y="298" class="h2">VIO ← ESP 3V3</text>
+  <text x="1215" y="331" class="h2">GND ← common GND (both pins)</text>
+  <text x="1215" y="376" class="h2">STEP ← GPIO14</text>
+  <text x="1215" y="409" class="h2">DIR  ← GPIO21</text>
+  <text x="1215" y="442" class="h2">EN   ← GPIO40</text>
+  <text x="1215" y="487" class="h2">PDN_UART ↔ shared UART net</text>
+  <text x="1215" y="520" class="h2">MS1, MS2 → GND (address 0)</text>
+  <text x="1215" y="553" class="small">CLK/DIAG/INDEX: not connected</text>
+
+  <rect x="1540" y="235" width="175" height="245" rx="8" class="sub"/>
+  <text x="1570" y="270" class="h1">MOTOR J2</text>
+  <text x="1570" y="310" class="h2">A1 — coil A</text>
+  <text x="1570" y="345" class="h2">A2 — coil A</text>
+  <text x="1570" y="395" class="h2">B1 — coil B</text>
+  <text x="1570" y="430" class="h2">B2 — coil B</text>
+  <path d="M1500 290 H1540 M1500 330 H1540 M1500 400 H1540 M1500 440 H1540" class="wire motor"/>
+  <text x="1535" y="515" class="small">Find pairs with ohmmeter.</text>
+  <text x="1535" y="539" class="small">Never unplug while powered.</text>
+
+  <!-- Identically named nets in blocks B and C connect point-to-point. -->
+  <rect x="1145" y="600" width="575" height="40" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="1175" y="626" class="h2">CONNECT IDENTICALLY NAMED NETS BETWEEN BLOCKS B AND C</text>
+
+  <!-- Accessories -->
+  <rect x="45" y="815" width="1710" height="345" rx="12" class="panel"/>
+  <text x="70" y="853" class="h1">D. ACCESSORY CONNECTORS</text>
+
+  <rect x="75" y="890" width="235" height="205" rx="9" class="sub"/>
+  <text x="115" y="925" class="h1">BUTTON J3</text>
+  <text x="105" y="965" class="h2">GPIO10 ─ switch ─ GND</text>
+  <text x="103" y="998" class="small">Internal pull-up enabled</text>
+  <text x="100" y="1030" class="small">Pressed = LOW</text>
+
+  <rect x="335" y="890" width="250" height="205" rx="9" class="sub"/>
+  <text x="385" y="925" class="h1">SENSOR J4</text>
+  <text x="365" y="965" class="h2">GPIO11 ─ switch ─ GND</text>
+  <text x="365" y="998" class="small">Filament present must read LOW</text>
+  <text x="365" y="1030" class="small">Verify switch state with meter</text>
+
+  <rect x="610" y="890" width="270" height="205" rx="9" class="sub"/>
+  <text x="680" y="925" class="h1">SERVO J5</text>
+  <text x="640" y="963" class="h2">S: GPIO12 through 330Ω</text>
+  <text x="640" y="997" class="h2">+: +5V</text>
+  <text x="640" y="1031" class="h2">–: GND</text>
+  <text x="640" y="1065" class="small">C2 bulk capacitor nearby</text>
+
+  <rect x="905" y="890" width="270" height="205" rx="9" class="sub"/>
+  <text x="950" y="925" class="h1">WS2812 J6</text>
+  <text x="935" y="963" class="h2">DIN: GPIO9 through 330Ω</text>
+  <text x="935" y="997" class="h2">5V: +5V</text>
+  <text x="935" y="1031" class="h2">GND: GND</text>
+  <text x="935" y="1065" class="small">Use WS2812/NeoPixel, not plain RGB</text>
+
+  <rect x="1200" y="890" width="265" height="205" rx="9" class="sub"/>
+  <text x="1245" y="925" class="h1">FAN DRIVER</text>
+  <text x="1225" y="963" class="h2">IN: GPIO13</text>
+  <text x="1225" y="997" class="h2">V+: +5V • GND: GND</text>
+  <text x="1225" y="1031" class="h2">OUT+: fan+ • OUT–: fan–</text>
+  <text x="1225" y="1065" class="small">Must include flyback diode</text>
+
+  <rect x="1490" y="890" width="235" height="205" rx="9" class="sub"/>
+  <text x="1514" y="925" class="h1">CONN LED (OPT.)</text>
+  <text x="1515" y="963" class="h2">3V3 → 1kΩ → LED A</text>
+  <text x="1515" y="997" class="h2">LED K → GPIO47</text>
+  <text x="1515" y="1031" class="small">Active-low output</text>
+
+  <!-- Footer / legend -->
+  <text x="55" y="1202" class="small">WIRE COLORS:</text>
+  <line x1="175" y1="1197" x2="225" y2="1197" class="wire p12"/><text x="235" y="1202" class="small">+12V</text>
+  <line x1="305" y1="1197" x2="355" y2="1197" class="wire p5"/><text x="365" y="1202" class="small">+5V</text>
+  <line x1="425" y1="1197" x2="475" y2="1197" class="wire p33"/><text x="485" y="1202" class="small">3V3</text>
+  <line x1="545" y1="1197" x2="595" y2="1197" class="wire gnd"/><text x="605" y="1202" class="small">GND</text>
+  <line x1="670" y1="1197" x2="720" y2="1197" class="wire sig"/><text x="730" y="1202" class="small">GPIO</text>
+  <line x1="800" y1="1197" x2="850" y2="1197" class="wire uart"/><text x="860" y="1202" class="small">UART</text>
+  <rect x="1200" y="1174" width="555" height="52" fill="#ffffff" stroke="#111827" stroke-width="2"/>
+  <text x="1215" y="1196" class="tiny">DRAWING: LTS-RSP-DIY-001  REV A  2026-08-11</text>
+  <text x="1215" y="1216" class="tiny">REFERENCE ONLY — WIRE BY PRINTED MODULE PIN LABELS • SEE README NETLIST</text>
+</svg>
